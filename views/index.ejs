@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Início</title>
+  <link rel="website icon" type="png" href="image.png">
+</head>
+<body>
+    <script>
+        if (window.innerWidth <= 768) {
+        document.write('<link rel="stylesheet" href="/homeMobile.css">');
+        document.write(`
+        
+  <div class="container">
+    <h1>Bem-vindo</h1>
+
+    <img class="image" width="160px" src="image.png">
+  </div>
+
+
+
+  <div class="buttons">
+    <a href="/login"><button>Entrar</button></a>
+    <a href="/register"><button>Registrar</button></a>
+  </div>
+
+
+      `);
+    } else {
+      document.write('<link rel="stylesheet" href="/index.css">');
+      document.write(` 
+
+
+      <h1>Bem-vindo </h1>
+      <a href="/login"><button>Entrar</button></a>
+      <a href="/register"><button>Registrar</button></a>
+
+
+
+      `);
+    }
+  </script>
+
+
+</body>
+</html>

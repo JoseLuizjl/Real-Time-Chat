@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Chat</title>
+  <link rel="stylesheet" href="/chat.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.css">
+  <link rel="website icon" type="png" href="image.png">
+<body>
+  <script>
+    if (window.innerWidth <= 768) {
+    document.write('<link rel="stylesheet" href="/mobileChat.css">');
+    document.write(`
+
+    <div class="message-area" id="chat-box"></div>
+
+    <div class="conversation-compose">         
+            
+        <div class="emoji-container">
+            <span class="emoji-icon" id="emoji-icon"><i class="fa-regular fa-face-smile"></i></span>
+            <div class="emoji-list" id="emoji-list"></div>
+        </div>
+        <input class="input-msg" type="text" id="message" placeholder="Mensagem" autocomplete="off">
+        <button class="send-button" onclick="sendMessage()">   
+          <img class="sendIcon" width="15px" src="sendIcon.png">
+          </button>
+    </div>
+
+  `);
+} else {
+  document.write('<link rel="stylesheet" href="/chat.css">');
+  document.write(` 
+
+  <div class="chat-container">
+    <div class="contacts-list">
+        <h2>Contatos</h2>
+        <ul class="contacts">
+            <li class="contact">Contato 1</li>
+            <li class="contact">Contato 2</li>
+            <li class="contact">Contato 3</li>
+        </ul>
+    </div>
+    
+    <div class="chat">
+        <div class="chat-header">
+            <h2>Nome do Contato</h2>
+        </div>
+        <div class="chat-messages" id="chat-box">
+        </div>
+        <div class="message-input">
+
+            <div class="emoji-container">
+                <span class="emoji-icon" id="emoji-icon"><i class="fa-regular fa-face-smile"></i></span>
+                <div class="emoji-list" id="emoji-list"></div>
+            </div>
+
+            <input type="text" id="message" placeholder="Mensagem" autocomplete="off">
+            <button class="sendBtn" onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+</div>
+
+  `);
+}
+
+
+const username = '<%= user.username %>'; 
+</script>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/chat.js"></script>
+  <script src="/emoji.js"></script>
+</body>
+</html>

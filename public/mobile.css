@@ -1,0 +1,118 @@
+body {  
+    background: white;
+    overflow: hidden;  
+    font-family: 'Montserrat', sans-serif;
+}
+  
+
+  .padding-top-100px {padding-top: 100px;}
+  .image {margin-bottom: 25px;}
+  
+  #loginContainer{
+      background-color: #222831;
+      height: 100vh;
+  }
+  
+  .login-form {
+      width: auto; 
+  }
+  
+  .login-form {
+      color: #fff;
+      text-align: center;
+      font-size: 0.8em;
+  }
+  
+  .inputStyle, .btn {
+      min-height: 38px;
+      border-radius: 8px;
+  }
+  
+  .input-group {
+      background: rgba(255, 247, 247, 0.1);
+      color: rgb(255, 255, 255);
+      border: 2px solid #ffffff;
+      border-radius: 8px;
+  }
+  
+  
+  .input-group>.custom-select:not(:first-child), 
+  .input-group>.inputStyle:not(:first-child) {
+      color: #ffffff;
+      background: transparent;
+      text-transform: none;
+      outline: none;
+      border: none;
+  }
+  
+  .inputIcon .fa {
+      font-size: 18px;
+      padding: 10px;
+      color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .form-group {
+      margin-bottom: 1rem;
+      padding-left: 55px;
+      padding-right: 55px;
+  }
+  
+  .clearfix {
+      padding-left: 55px;
+      padding-right: 55px;
+  }
+  
+  .btn-success,
+  .btn-success:hover {
+      height: 42px;
+      background: linear-gradient(to bottom, #56CCF2, #2F80ED);
+      color: #222831;
+      box-shadow: 0px 4px 5px -5px #3FA9F5;
+      border-color: #3FA9F5 !important;
+      text-transform: uppercase;
+      font-size: 15px;
+  }
+
+  .accCreate {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin-bottom: 30px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .accCreate a {
+    text-decoration: none;
+}
+
+  .createText {
+    color: #ffffff;
+    font-weight: bold;
+    outline: none;
+    text-decoration: none;
+  }
+
+  .fail {
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid transparent;
+  -webkit-text-fill-color: rgb(255, 255, 255) !important;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
