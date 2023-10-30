@@ -17,6 +17,7 @@ Agora, você precisará instalar as dependências necessárias para o seu projet
 
 npm install sequelize sequelize-cli sqlite3
 npm install express ejs express-session bcrypt mysql2 sequelize
+npm install socket.io
 npm install
 
 
@@ -25,10 +26,10 @@ Isso instalará as bibliotecas necessárias, como o Sequelize para a integraçã
 
 Passo 3: Configuração do Banco de Dados:
 
-No arquivo index.js, substitua name_data_base, user_name, e password pelos detalhes do seu banco de dados MySQL.
+No arquivo index.js, substitua database, user e password pelos detalhes do seu banco de dados MySQL.
 
 
-const sequelize = new Sequelize('name_data_base', 'user_name', 'password', {
+const sequelize = new Sequelize('database', 'user', 'password',  {
   host: 'localhost',
   dialect: 'mysql',
 });
