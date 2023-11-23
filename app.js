@@ -120,7 +120,7 @@ io.on('connection', (socket) => {
   console.log('Um cliente se conectou');
 
   socket.on('message', (message) => {
-      console.log('Mensagem recebida:', message);
+      //console.log('Mensagem recebida:', message);
       io.emit('message', message); 
   });
 
