@@ -27,10 +27,10 @@ const sequelize = new Sequelize('database', 'user', 'password',  {
 
 sequelize.authenticate()
   .then(() => {
-    console.log('Conexão estabelecida com sucesso.');
+    console.log('Successfully Connection.');
   })
   .catch((err) => {
-    console.error('Não foi possível conectar ao banco de dados:', err);
+    console.error('It was not possible to connect to the database:', err);
   });
 
 const User = sequelize.define('user', {
@@ -71,11 +71,11 @@ sequelize.sync()
           req.session.user = user;
           res.redirect('/chat');
         } else {
-          res.render('login', { message: 'Email ou senha incorretos' });
+          res.render('login', { message: 'Incorrect email or password.' });
         }
       } catch (err) {
         console.error(err);
-        res.render('login', { message: 'Ocorreu um erro. Tente novamente' });
+        res.render('login', { message: 'An error occurred. Please try again.' });
       }
     });
 
@@ -94,9 +94,9 @@ sequelize.sync()
   } catch (err) {
     console.error(err);
     if (err instanceof Sequelize.UniqueConstraintError) {
-      res.render('register', { message: 'Usuário ou email já existem' });
+      res.render('register', { message: 'Username and password already exist.' });
     } else {
-      res.render('register', { message: 'Ocorreu um erro. Tente novamente' });
+      res.render('register', { message: 'Error, try again.' });
     }
   }
 });
@@ -117,15 +117,14 @@ sequelize.sync()
 //chat
 
 io.on('connection', (socket) => {
-  console.log('Um cliente se conectou');
+  console.log('A client has connected.');
 
   socket.on('message', (message) => {
-      //console.log('Mensagem recebida:', message);
       io.emit('message', message); 
   });
 
   socket.on('disconnect', () => {
-      console.log('Um cliente desconectou');
+      console.log('A client has disconnected.');
   });
 });
 
@@ -133,6 +132,6 @@ io.on('connection', (socket) => {
 const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}.`);
+  console.log(`Server connected, ${PORT}.`);
 });
 });
