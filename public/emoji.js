@@ -16,7 +16,7 @@ fetch('https://emoji-api.com/emojis?access_key=c8c894c9db6c83b7bfcd8cb84cad5bb52
     });
   })
   .catch(error => {
-    console.log('Erro ao obter emojis:', error);
+    console.log('Error:', error);
 });
 
 emojiIcon.addEventListener('click', () => {
