@@ -1,7 +1,7 @@
 const socket = io();
 
 socket.on("connect", () => {
-    console.log("Conectado ao servidor WebSocket");
+    console.log("WebSocket Connected");
 });
 
 socket.on("message", (message) => {
