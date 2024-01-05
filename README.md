@@ -1,44 +1,42 @@
-Este guia o ajudará a configurar um ambiente Node.js com um banco de dados MySQL. Certifique-se de ter o Node.js e o MySQL instalados em seu sistema antes de prosseguir.
 
-Passo 1: Inicialização do Projeto:
+# Setting up a Node.js Environment with MySQL Database
 
-Abra seu terminal e navegue até o diretório onde deseja criar seu projeto.
+This guide will help you set up a Node.js environment with a MySQL database. Make sure you have Node.js and MySQL installed on your system before proceeding.
 
-Execute os seguintes comandos para inicializar um projeto Node.js:
+## Step 1: Project Initialization
+
+Open your terminal and navigate to the directory where you want to create your project.
+
+Run the following commands to initialize a Node.js project:
 
 npm init -y
 
-Isso criará um arquivo package.json com as configurações padrão.
+This will create a `package.json` file with default settings.
 
+## Step 2: Installing Dependencies
 
-Passo 2: Instalação de Dependências:
-
-Agora, você precisará instalar as dependências necessárias para o seu projeto. Execute os seguintes comandos no terminal.
+Now, you need to install the necessary dependencies for your project. Run the following commands in the terminal.
 
 npm install sequelize sequelize-cli sqlite3
 npm install express ejs express-session bcrypt mysql2 sequelize
 npm install socket.io
 npm install
 
+This will install the required libraries, such as Sequelize for database integration and Express for creating the web server.
 
-Isso instalará as bibliotecas necessárias, como o Sequelize para a integração do banco de dados, o Express para criar o servidor web.
+## Step 3: Database Configuration
 
+In the `app.js` file, replace `database`, `user`, and `password` with your MySQL database details.
 
-Passo 3: Configuração do Banco de Dados:
-
-No arquivo index.js, substitua database, user e password pelos detalhes do seu banco de dados MySQL.
-
-
-const sequelize = new Sequelize('database', 'user', 'password',  {
+const sequelize = new Sequelize('database', 'user', 'password', {
   host: 'localhost',
   dialect: 'mysql',
 });
 
+## Step 4: Running the Server
 
-Passo 4: Executando o Servidor:
+Run the following command in the terminal to start the server.
 
-Execute o seguinte comando no terminal para iniciar o servidor.
+node app.js
 
-node index.js
-
-Acesse http://localhost:3000 no navegador para verificar se tudo está funcionando corretamente.
+Visit http://localhost:3000 in your browser to check if everything is working correctly.
