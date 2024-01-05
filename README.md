@@ -1,6 +1,3 @@
-README.md:
-
-```
 # Node.js and MySQL Project Setup Guide
 
 This guide will help you set up a Node.js environment with a MySQL database. Make sure you have Node.js and MySQL installed on your system before proceeding.
