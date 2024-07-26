@@ -1,4 +1,5 @@
 require('dotenv').config();
+const mysql = require('mysql');
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
@@ -6,7 +7,6 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const Sequelize = require('sequelize');
 const { Op } = require('sequelize');
-
 
 const app = express();
 const server = http.createServer(app);
@@ -22,16 +22,15 @@ app.use(session({
   saveUninitialized: false,
 }));
 
-const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, {
-  host: process.env.DATABASE_HOST,
-  dialect: 'postgres',
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    },
-  },
+
+const sequelize = new Sequelize(
+  process.env.DATABASE_NAME, 
+  process.env.DATABASE_USER, 
+  process.env.DATABASE_PASSWORD, {
+  host: 'localhost',
+  dialect: 'mysql',
 });
+
 
 sequelize.authenticate()
   .then(() => {
