@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
@@ -5,6 +6,7 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const Sequelize = require('sequelize');
 const { Op } = require('sequelize');
+
 
 const app = express();
 const server = http.createServer(app);
@@ -20,17 +22,23 @@ app.use(session({
   saveUninitialized: false,
 }));
 
-const sequelize = new Sequelize('database', 'user', 'password',  {
-  host: 'localhost',
-  dialect: 'mysql',
+const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, {
+  host: process.env.DATABASE_HOST,
+  dialect: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
 });
 
 sequelize.authenticate()
   .then(() => {
-    console.log('Successfully Connection.');
+    console.log('Successfully connected to the database.');
   })
   .catch((err) => {
-    console.error('It was not possible to connect to the database:', err);
+    console.error('Unable to connect to the database:', err);
   });
 
 const User = sequelize.define('user', {
@@ -60,8 +68,8 @@ sequelize.sync()
     });
 
     app.get('/login', (req, res) => {
-        res.render('login', { message: null });
-      });
+      res.render('login', { message: null });
+    });
 
     app.post('/login', async (req, res) => {
       const { email, password } = req.body;
@@ -80,26 +88,26 @@ sequelize.sync()
     });
 
     app.get('/register', (req, res) => {
-        res.render('register', { message: null }); 
-      });
+      res.render('register', { message: null });
+    });
 
     app.post('/register', async (req, res) => {
-  const { username, email, password } = req.body;
-  try {
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(password, salt);
-    const user = await User.create({ username, email, password: hash });
-    req.session.user = user;
-    res.redirect('/chat');
-  } catch (err) {
-    console.error(err);
-    if (err instanceof Sequelize.UniqueConstraintError) {
-      res.render('register', { message: 'Username and password already exist.' });
-    } else {
-      res.render('register', { message: 'Error, try again.' });
-    }
-  }
-});
+      const { username, email, password } = req.body;
+      try {
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+        const user = await User.create({ username, email, password: hash });
+        req.session.user = user;
+        res.redirect('/chat');
+      } catch (err) {
+        console.error(err);
+        if (err instanceof Sequelize.UniqueConstraintError) {
+          res.render('register', { message: 'Username or email already exists.' });
+        } else {
+          res.render('register', { message: 'Error, try again.' });
+        }
+      }
+    });
 
     app.get('/chat', (req, res) => {
       if (req.session.user) {
@@ -114,24 +122,21 @@ sequelize.sync()
       res.redirect('/');
     });
 
-//chat
+    io.on('connection', (socket) => {
+      console.log('A client has connected.');
 
-io.on('connection', (socket) => {
-  console.log('A client has connected.');
+      socket.on('message', (message) => {
+        io.emit('message', message);
+      });
 
-  socket.on('message', (message) => {
-      io.emit('message', message); 
+      socket.on('disconnect', () => {
+        console.log('A client has disconnected.');
+      });
+    });
+
+    const PORT = process.env.PORT || 3000;
+
+    server.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}.`);
+    });
   });
-
-  socket.on('disconnect', () => {
-      console.log('A client has disconnected.');
-  });
-});
-
-
-const PORT = process.env.PORT || 3000;
-
-server.listen(PORT, () => {
-  console.log(`Server connected, ${PORT}.`);
-});
-});
